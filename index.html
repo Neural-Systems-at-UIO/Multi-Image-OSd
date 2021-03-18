@@ -1,15 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Multi-Image viewer</title>
-
-<style>
-
-</style>
-
-</head>
-<body>
-XXX
-</body>
-</html>
+<div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+<script src="openseadragon.min.js"></script>
+<script type="text/javascript">
+    var viewer = OpenSeadragon({
+        id: "openseadragon1",
+        prefixUrl: "images/",
+        tileSources: "https://object.cscs.ch/v1/AUTH_08c08f9f119744cbbf77e216988da3eb/imgsvc-fd1c8cb9-adbe-4531-82d9-b57c5d382849/hbp-00169_482_R605_2002__s068.tif/hbp-00169_482_R605_2002__s068.dzi"
+    });
+</script>
