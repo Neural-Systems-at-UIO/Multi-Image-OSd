@@ -4,6 +4,12 @@
     var viewer = OpenSeadragon({
         id: "openseadragon1",
         prefixUrl: "images/",
-        tileSources: "https://object.cscs.ch/v1/AUTH_08c08f9f119744cbbf77e216988da3eb/imgsvc-fd1c8cb9-adbe-4531-82d9-b57c5d382849/hbp-00169_482_R605_2002__s068.tif/hbp-00169_482_R605_2002__s068.dzi"
     });
+    
+    viewer.addTiledImage({
+        tileSource: "https://object.cscs.ch/v1/AUTH_08c08f9f119744cbbf77e216988da3eb/imgsvc-fd1c8cb9-adbe-4531-82d9-b57c5d382849/hbp-00169_482_R605_2002__s068.tif/hbp-00169_482_R605_2002__s068.dzi",
+        x: 5,
+        y: 0,
+        width: 10
+});
 </script>
