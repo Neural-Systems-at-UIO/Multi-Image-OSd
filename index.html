@@ -21,7 +21,7 @@
         for(let dir of value) {
             dir = dir.subdir;
             if(dir) {
-                let name = dir.substring(0, dir.lastIndexOf("."));
+                let name = dir.substring(0, dir.indexOf("."));
                 let url = path + dir + name + ".dzi";
                 console.log(url);
                 dzis.push(url);
