@@ -31,8 +31,8 @@
         var viewer = OpenSeadragon({
             id: "openseadragon1",
             prefixUrl: "images/",
-            sequenceMode: true,
-            showReferenceStrip: true,
+            sequenceMode: (!COLLECTION_MODE),
+            showReferenceStrip: (!COLLECTION_MODE),
             collectionMode: COLLECTION_MODE,
             collectionRows: COLLECTION_ROWS,
             tileSources: dzis
