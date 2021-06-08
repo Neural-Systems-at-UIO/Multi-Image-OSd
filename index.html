@@ -37,8 +37,23 @@
                 dzis.push(url);
             }
         }
-        console.log(dzis);
-        viewer.tileSources = dzis;
+        //console.log(dzis);
+        //viewer.tileSources = dzis;
+        
+        
+        
+        var viewer = OpenSeadragon({
+        id: "openseadragon1",
+        prefixUrl: "images/",
+        //collectionMode: true,
+        //collectionRows: 10,
+
+        tileSources: dzis
+
+    });
+        
+        
+        
     });
 
     function getUrlParamValue(paramName) {
