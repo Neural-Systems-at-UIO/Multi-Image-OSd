@@ -1,4 +1,6 @@
-<div id="openseadragon1" style="width: 100%; height: 100%;"></div>
+<div id="output" style="font-size: small;"></div>
+<div id="seadragon-viewer"
+	style="position: absolute; left: 0; top: 30px; right: 0; bottom: 0;"></div>
 <script src="openseadragon.min.js"></script>
 <script type="text/javascript">
 
@@ -23,13 +25,13 @@
             if(dir) {
                 let name = dir.substring(0, dir.lastIndexOf("."));
                 let url = path + dir + name + ".dzi";
-                console.log(url);
+                //console.log(url);
                 dzis.push(url);
             }
         }
 
         var viewer = OpenSeadragon({
-            id: "openseadragon1",
+            id: "seadragon-viewer",
             prefixUrl: "images/",
             sequenceMode: (!COLLECTION_MODE),
             showReferenceStrip: (!COLLECTION_MODE),
@@ -37,6 +39,47 @@
             collectionRows: COLLECTION_ROWS,
             tileSources: dzis
         });
+        
+        if (viewer.sequenceMode) {
+        	viewer.addHandler('open', function() {
+        		document.getElementById("output").innerHTML = dzis[viewer.currentPage()];
+          	});
+        } else {
+        	
+        	var hitTest = function(position) {
+            	
+                var box;
+                var count = viewer.world.getItemCount();
+                for (var i = 0; i < count; i++) {
+                    box = viewer.world.getItemAt(i).getBounds();
+                    if (position.x > box.x &&
+                            position.y > box.y && 
+                            position.x < box.x + box.width &&
+                            position.y < box.y + box.height) return i;
+                }
+
+                return -1;
+            };
+    		
+            var viewerElement = document.getElementById("seadragon-viewer");
+            viewerElement.addEventListener('mousemove', function(event) {
+            	var pixel = new OpenSeadragon.Point(event.clientX, event.clientY);
+                pixel.y -= viewerElement.offsetTop;
+                var index = hitTest(viewer.viewport.pointFromPixel(pixel));
+                var outputElement = document.getElementById("output");
+                outputElement.innerHTML = (index === -1 ? '' : dzis[index]);
+            });
+
+    /*         viewer.addHandler('canvas-click', function(event) {
+            	if (!event.quick) return;
+
+                var index = hitTest(viewer.viewport.pointFromPixel(event.position));   
+                if (index !== -1) {
+                    viewer.viewport.fitBounds(viewer.world.getItemAt(index).getBounds());
+                }
+            }); */
+        }
+        
     });
        
     function getUrlParamValue(paramName) {
