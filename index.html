@@ -49,7 +49,9 @@
         	onClick: openHelpWindow
     	});
         
-        viewer.addControl(helpButton.element, { anchor: OpenSeadragon.ControlAnchor.TOP_LEFT });
+        //viewer.addControl(helpButton.element, { anchor: OpenSeadragon.ControlAnchor.TOP_LEFT });
+        viewer.buttons.buttons.push(helpButton);
+		viewer.buttons.element.appendChild(helpButton.element);
 
         
         if (viewer.sequenceMode) {
