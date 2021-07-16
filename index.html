@@ -40,6 +40,18 @@
             tileSources: dzis
         });
         
+        var helpButton = new OpenSeadragon.Button({
+        	tooltip: 'Open help in a new window',
+        	srcRest: 'images/question_rest.png',
+        	srcGroup: 'images/question_grouphover.png',
+        	srcHover: 'images/question_hover.png',
+        	srcDown: 'images/question_pressed.png',
+        	onClick: openHelpWindow
+    	});
+        
+        viewer.addControl(helpButton.element, { anchor: OpenSeadragon.ControlAnchor.TOP_LEFT });
+
+        
         if (viewer.sequenceMode) {
         	viewer.addHandler('open', function() {
         		document.getElementById("output").innerHTML = dzis[viewer.currentPage()];
@@ -84,6 +96,10 @@
        
     function getUrlParamValue(paramName) {
         return (new URL(window.location)).searchParams.get(paramName);
+    }
+    
+    function openHelpWindow() {
+    	window.open('https://wiki.uio.no/projects/navigator3/index.php/Multi-Image_OpenSeadragon_Viewer_Help', '_blank')
     }
 
 </script>
