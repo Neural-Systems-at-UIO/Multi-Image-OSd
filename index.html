@@ -7,6 +7,7 @@
     const BUCKET = getUrlParamValue('bucket');
     const COLLECTION_MODE = getUrlParamValue('collectionMode');
     const COLLECTION_ROWS = getUrlParamValue('collectionRows');
+    const LIMIT = getUrlParamValue('limit');
 
     if (!BUCKET) alert("No bucket provided");
 
@@ -21,14 +22,14 @@
     
     console.log(path + "?delimiter=/");
     
-    fetch(path + "?delimiter=/", {headers})
+    fetch(path + "?delimiter=/" + (LIMIT ? "&limit=" + LIMIT : ""), {headers})
     .then(response => response.json())
     .then(value => {
         var dzis = [];
         //Data Proxy has it in "objects" array
-        for(let dir of ((ifDataProxy) ? value.objects : value)) {
+        for (let dir of ((ifDataProxy) ? value.objects : value)) {
             dir = dir.subdir;
-            if(dir) {
+            if (dir) {
                 let name = dir.substring(0, dir.lastIndexOf("."));
                 let url = path + "/" + dir + name + ".dzi";
                 console.log(url);
