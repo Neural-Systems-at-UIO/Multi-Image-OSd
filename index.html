@@ -14,21 +14,29 @@
     headers.append("Accept", "application/json");
 
     let path = BUCKET;
-    if(!path.endsWith("/")) path = path + "/";
-
+    if (path.endsWith('/')) path = path.slice(0, -1);
+    
+    let ifDataProxy = (new URL(path).host) === "data-proxy.ebrains.eu"; 
+    console.log("data-proxy.ebrains.eu? " + ifDataProxy);
+    
+    console.log(path + "?delimiter=/");
+    
     fetch(path + "?delimiter=/", {headers})
     .then(response => response.json())
     .then(value => {
         var dzis = [];
-        for(let dir of value) {
+        //Data Proxy has it in "objects" array
+        for(let dir of ((ifDataProxy) ? value.objects : value)) {
             dir = dir.subdir;
             if(dir) {
                 let name = dir.substring(0, dir.lastIndexOf("."));
-                let url = path + dir + name + ".dzi";
-                //console.log(url);
+                let url = path + "/" + dir + name + ".dzi";
+                console.log(url);
                 dzis.push(url);
             }
         }
+        
+        //console.log("dzis: " + dzis); 
 
         var viewer = OpenSeadragon({
             id: "seadragon-viewer",
