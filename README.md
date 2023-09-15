@@ -22,9 +22,6 @@ Dmitri Darine
 
 # Authors
  Maja A Puchades, Jan G Bjaalie. 
-
-# Licence
-- GPL
-
+ 
 # Contact us
 Report issues here on github or email: support@ebrains.eu
